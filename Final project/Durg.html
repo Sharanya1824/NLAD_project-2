@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School of Management Studies</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Serif', Georgia, Times, serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 0.5;
+            height: 500px;
+            width: 500px;
+            background-image: url('/api/placeholder/400/200');
+            background-size: cover;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+
+        .hero-text {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .programmes-section {
+            margin-top: 60px;
+        }
+
+        .programmes-title {
+            font-size: 2em;
+            color: Black;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .programmes-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #f97316;
+        }
+
+        .programme-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            color: #4b5563;
+            cursor: pointer;
+            border: none;
+            background: none;
+            position: relative;
+        }
+
+        .tab.active {
+            color: #1a365d;
+            font-weight: bold;
+        }
+
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #1a365d;
+        }
+
+        .programme-cards {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .programme-card {
+            flex: 1;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .programme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Durg – A Stronghold of Learning.</h1>
+                <p class="hero-text">
+                   Chaturya’s campus is a blend of modern architecture and sustainable design, equipped with advanced technology and a digital library. The campus also features smart classrooms, research labs, and recreational spaces, providing a holistic environment for learning.<br><br>
+ Ensure state-of-the-art facilities, maintain a green and sustainable campus, and leverage technology to enhance the learning experience.<br><br>
+Imaginary Example: The Chaturya Smart Campus project includes fully integrated digital classrooms, online learning management systems, and AI-assisted academic advising, offering students a high-tech and personalized education experience.
+.</p>
+            </div>
+            <div class="hero-image">
+                <img src="CSV.jpg"alt="sp1" style="width:500px; height:500px;">
+            
+
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+function checkForInvalidInput(cell) {
+    const cells = document.querySelectorAll(".sudoku-board div");
+    let board = Array(9).fill().map(() => Array(9).fill(""));
+
+    cells.forEach((cell, index) => {
+        board[Math.floor(index / 9)][index % 9] = cell.textContent;
+    });
+
+    const row = Math.floor([...cells].indexOf(cell) / 9);
+    const col = [...cells].indexOf(cell) % 9;
+    const value = cell.textContent;
+
+    document.querySelectorAll(".sudoku-board div").forEach(c => c.classList.remove("incorrect"));
+
+    if (value && !isValid(board, row, col, value)) {
+        cell.classList.add("incorrect");
+    }
+
+    checkCompletion(); // Check if the puzzle is completed
+}
+
+
+
+function checkCompletion() {
+    const cells = document.querySelectorAll(".sudoku-board div");
+    let board = Array(9).fill().map(() => Array(9).fill(""));
+    
+    for (let i = 0; i < 81; i++) {
+        let value = cells[i].textContent;
+        if (value === "" || value < "1" || value > "9") {
+            return; // Puzzle is not complete yet
+        }
+        board[Math.floor(i / 9)][i % 9] = value;
+    }
+
+    // Check if the solution is correct
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            let value = board[row][col];
+            board[row][col] = ""; // Temporarily remove to check validity
+            if (!isValid(board, row, col, value)) {
+                return; // Incorrect solution
+            }
+            board[row][col] = value; // Restore the value
+        }
+    }
+
+    // If all checks pass, puzzle is solved
+    clearInterval(timerInterval); // Stop the timer
+    alert(`🎉 Congratulations! You have completed the puzzle in ${document.getElementById("timer").textContent}`);
+}

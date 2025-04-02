@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+            background:#FFF2F2;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200vh;
+            margin: 0;
+        }
+        .container {
+            background: #7886C7;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            width: 800px;
+            font-size: 18px;
+        }
+        input {
+            width: 50%;
+            padding: 8.5px;
+            margin: 1px ;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: white;
+            color: Black;
+            font-size:18px;
+        }
+        button {
+            background: #0F0A0A;
+            color: white;
+            border: none;
+            padding: 10px ;
+            cursor: pointer;
+            border-radius: 4.5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background:black;
+        }
+        #weather-info, #forecast-info {
+            margin-top: 40px;
+        }
+        .forecast {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            background: #A9B5DF;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .forecast-day {
+            text-align: center;
+        }
+        .forecast-day img {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="getWeather()">Get Weather</button>
+        <div id="weather-info"></div>
+        <div id="forecast-info"></div>
+    </div>
+    <script>
+        async function getWeather() {
+            const apiKey = 'c7aa5bb3292625fc5fbaf63b4de9aa0e';
+            const city = document.getElementById('city').value;
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},IN&appid=${apiKey}&units=metric`;
+            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city},IN&appid=${apiKey}&units=metric`;
+
+            try {
+                const weatherResponse = await fetch(weatherUrl);
+                const weatherData = await weatherResponse.json();
+
+                if (weatherData.cod === 200) {
+                    document.getElementById('weather-info').innerHTML = `
+                        <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
+                        <p>Temperature: ${weatherData.main.temp}°C</p>
+                        <p>Humidity: ${weatherData.main.humidity}%</p>
+                        <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
+                        <p>Condition: ${weatherData.weather[0].description}</p>
+                    `;
+                } else {
+                    document.getElementById('weather-info').innerHTML = `<p>City not found. Please try again.</p>`;
+                }
+
+                const forecastResponse = await fetch(forecastUrl);
+                const forecastData = await forecastResponse.json();
+
+                if (forecastData.cod === "200") {
+                    let forecastHTML = '<h3>7-Day Forecast</h3><div class="forecast">';
+                    let dailyForecast = {};
+                    
+                    forecastData.list.forEach(entry => {
+                        const date = new Date(entry.dt_txt).toDateString();
+                        if (!dailyForecast[date]) {
+                            dailyForecast[date] = entry;
+                        }
+                    });
+
+                    Object.values(dailyForecast).slice(0, 7).forEach(day => {
+                        forecastHTML += `
+                            <div class="forecast-day">
+                                <p>${new Date(day.dt_txt).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                                <img src="https://openweathermap.org/img/wn/${day.weather[0].icon}.png" alt="Weather Icon">
+                                <p>${day.main.temp}°C</p>
+                            </div>
+                        `;
+                    });
+                    
+                    forecastHTML += '</div>';
+                    document.getElementById('forecast-info').innerHTML = forecastHTML;
+                }
+            } catch (error) {
+                document.getElementById('weather-info').innerHTML = `<p>Error fetching weather data.</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

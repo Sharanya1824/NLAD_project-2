@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+        }
+        header .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        header .icons {
+            display: flex;
+            gap: 10px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .results h2 {
+            margin: 10px 0;
+        }
+        .bmi-bar {
+            display: flex;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .bmi-bar div {
+            flex: 1;
+        }
+        .bmi-bar .underweight { background-color: yellow; }
+        .bmi-bar .normal { background-color: green; }
+        .bmi-bar .overweight { background-color: orange; }
+        .bmi-bar .obesity { background-color: red; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">BMI Calculator</div>
+        <div class="icons">
+            <span>&#9776;</span> <!-- Menu icon -->
+            <span>&#128100;</span> <!-- Profile icon -->
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="input-group">
+            <label for="age">Age (2-120 years):</label>
+            <input type="number" id="age" min="2" max="120" required>
+        </div>
+        <div class="input-group">
+            <label for="height">Height:</label>
+            <select id="height-unit">
+                <option value="cm">Centimeters</option>
+                <option value="ft">Feet & Inches</option>
+            </select>
+            <input type="number" id="height" placeholder="Enter height" required>
+        </div>
+        <div class="input-group">
+            <label for="weight">Weight (in kg):</label>
+            <input type="number" id="weight" required>
+        </div>
+        <button onclick="calculateBMI()">Calculate</button>
+        <button onclick="resetFields()" style="margin-top: 10px; background-color: #6c757d;">Reset</button>
+
+        <div class="results" id="results">
+            <h2>Your BMI is: <span id="bmi-value"></span></h2>
+            <div class="bmi-bar">
+                <div class="underweight"></div>
+                <div class="normal"></div>
+                <div class="overweight"></div>
+                <div class="obesity"></div>
+            </div>
+            <p id="bmi-category"></p>
+            <small>Healthy BMI range: 18.5 - 25 kg/m<sup>2</sup></small>
+        </div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const age = document.getElementById('age').value;
+            const heightUnit = document.getElementById('height-unit').value;
+            let height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+
+            if (!age || !height || !weight) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            if (heightUnit === 'ft') {
+                const [feet, inches] = height.split('.');
+                height = (parseInt(feet) * 30.48) + (parseInt(inches || 0) * 2.54);
+            }
+
+            height = height / 100; // Convert height to meters
+            const bmi = (weight / (height * height)).toFixed(2);
+
+            const results = document.getElementById('results');
+            const bmiValue = document.getElementById('bmi-value');
+            const bmiCategory = document.getElementById('bmi-category');
+
+            bmiValue.textContent = bmi;
+            results.style.display = 'block';
+
+            if (bmi < 18.5) {
+                bmiCategory.textContent = 'Underweight';
+                bmiCategory.style.color = 'yellow';
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                bmiCategory.textContent = 'Normal';
+                bmiCategory.style.color = 'green';
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                bmiCategory.textContent = 'Overweight';
+                bmiCategory.style.color = 'orange';
+            } else {
+                bmiCategory.textContent = 'Obesity';
+                bmiCategory.style.color = 'red';
+            }
+        }
+
+        function resetFields() {
+            document.getElementById('age').value = '';
+            document.getElementById('height').value = '';
+            document.getElementById('weight').value = '';
+            document.getElementById('results').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

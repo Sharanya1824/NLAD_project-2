@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Infrastructure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4E2A84;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        .section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(78, 42, 132, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .card-inner {
+            display: flex;
+            align-items: stretch;
+            height: 100%;
+        }
+        .card-inner.reverse {
+            flex-direction: row-reverse;
+        }
+        .image-container {
+            flex: 1;
+            min-height: 300px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .content {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+        .card h2 {
+            color: #4E2A84;
+            font-size: 1.8rem;
+            margin: 0 0 20px;
+            font-weight: 600;
+        }
+        .card p {
+            color: #555;
+            margin: 0 0 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4E2A84;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+        .btn:hover {
+            background-color: #330e5c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(78, 42, 132, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .card-inner, .card-inner.reverse {
+                flex-direction: column;
+            }
+            .image-container {
+                min-height: 200px;
+            }
+            .content {
+                padding: 30px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>People</h1>
+    </header>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-inner">
+                <div class="image-container">
+                    <img src="LD.jpg" alt="Knowledge Centres">
+                </div>
+                <div class="content">
+                    <h2>Leadership Team
+ </h2>
+                    <p>Led by Dr. Vivek Rao, Chaturya’s leadership team includes visionaries from various academic and industry backgrounds. This diverse team provides strategic direction, encourages academic freedom, and upholds the institute’s commitment to excellence. Each member of the leadership embodies the Saptanga principles, focusing on innovative yet ethically grounded education.
+</p>
+                                   </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-inner reverse">
+                <div class="image-container">
+                    <img src="FE.jpeg" alt="Sports Arena">
+                </div>
+                <div class="content">
+                    <h2>Faculty Excellence</h2>
+                    <p>Chaturya prides itself on its accomplished faculty, who bring expertise from leading institutions and industry experiences. Professors and mentors are selected not only for their academic prowess but also for their passion for teaching and mentorship. Faculty members at Chaturya lead research projects, publish in prestigious journals, and engage actively in shaping students’ academic journeys..</p>
+                                   </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-inner">
+                <div class="image-container">
+                    <img src="SC.jpg" alt="Residential Spaces">
+                </div>
+                <div class="content">
+                    <h2>Student Community </h2>
+                    <p>Our students are our heart, bringing vibrancy to Chaturya’s campus. With active student clubs, diverse cultural programs, and impactful community service initiatives, the student community fosters a sense of camaraderie and purpose. Chaturya encourages student involvement, leadership development, and ethical responsibility, preparing them for meaningful careers and lives.</p>
+                         </div>
+            </div>
+        </div>
+
+           </section>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About Us</title>
+</head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+/* Global Styles */
+
+/* Header #5c5470 #647C90*/
+header {
+	background-color:#6c657e;
+	color: rgb(0, 0, 0);
+	padding: 10px 0;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 5px auto;
+	padding: 0 20px;
+}
+
+
+
+.nav-links {
+	list-style: none;
+	display: flex;
+}
+
+.nav-links li {
+	margin-right: 20px;
+}
+
+.nav-links a {
+	color: rgb(255,255,255);
+	padding: 10px;
+	font-weight: bold;
+    font-size:25px;
+	text-decoration: none;
+    font-family:Garamond;
+}
+
+.navbar a:hover {
+	background-color: #E8E8E8;
+	border-radius: 4px;
+	color: black;
+}
+
+/* About Section */
+.about {
+        
+	background: rgb(224, 251, 222);
+	background: linear-gradient(360deg, rgb(233,233,233) 0%, rgb(212,212,212) 100%);
+	padding: 235px 0 30px 0;
+	text-align: center;
+}
+
+.about h1 {
+        margin-top:0px;
+	font-size: 2.5rem;
+	margin-bottom: 5px;
+    font-family:Garamond;
+}
+
+.about p {
+        font-family:"Times New Romen", Times, serif;
+	font-size: 1rem;
+	color: #323030;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.about-info {
+	margin: 2rem 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: left;
+}
+
+.about-img {
+	width: 20rem;
+	height: 20rem;
+
+}
+
+.about-img img {
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+	object-fit: contain;
+}
+
+.about-info p {
+	font-size: 1.3rem;
+	margin: 0 2rem;
+	text-align: justify;
+}
+
+button {
+	border: none;
+	outline: 0;
+	padding: 10px;
+	margin: 2rem;
+	font-size: 1rem;
+	color: white;
+	background-color: #40b736;
+	text-align: center;
+	cursor: pointer;
+	width: 15rem;
+	border-radius: 4px;
+}
+
+button:hover {
+	background-color: #1f9405;
+}
+
+/* Team Section */
+.team {
+	padding: 10px;
+    margin: 10px;
+	text-align: center;
+}
+
+.team h1 {
+	font-size: 2.5rem;
+	margin-bottom: 20px;
+    font-family:Garamond;
+}
+
+.team-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 15px;
+	margin-top: 20px;
+}
+
+.card {
+	background-color: white;
+	border-radius: 6px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+	transition: transform 0.2s, box-shadow 0.2s;
+	width: 18rem;
+	height: 25rem;
+	margin-top: 10px;
+}
+
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.card-img {
+	width: 18rem;
+	height: 12rem;
+}
+
+.card-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
+.card-info button {
+	margin: 2rem 1rem;
+}
+
+.card-name {
+    font-family:Garamond;
+	font-size: 2rem;
+	margin: 10px 0;
+}
+
+.card-role {
+    font-family:"Times New Romen", Times, serif;
+	font-size: 1rem;
+	color: black;
+	margin: 5px 0;
+}
+
+.card-email {
+    font-family:"Times New Romen", Times, serif;
+	font-size: 1rem;
+    color: black;
+}
+
+/* Footer */
+footer {
+	background-color: #6c657e;
+	color: white;
+	text-align: center;
+	padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+	nav {
+		display: block;
+	}
+
+	.logo {
+		text-align: center;
+	}
+
+	.nav-links {
+		margin-top: 1rem;
+		justify-content: space-between;
+	}
+
+	.nav-links li {
+		margin-right: 0;
+	}
+
+	.about h1 {
+		font-size: 2rem;
+                
+	}
+
+	.about p {
+		font-size: 0.9rem;
+              
+	}
+
+	.about-info {
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.about-img {
+		width: 60%;
+		height: 60%;
+		margin-bottom: 1rem;
+	}
+
+	.about-info p {
+		margin: 1rem 2rem;
+	}
+
+	.about-info button {
+		margin: 1rem 2rem;
+		width: 10rem;
+	}
+
+	.team {
+		margin: 0 1rem;
+	}
+}
+
+</style>
+<body>
+	<header>
+		<nav>
+			<div class="logo">
+                        <img src="logov3.png" alt="Logo" width="100" height="80">
+                        </div>
+			<ul class="nav-links">
+				<li><a href="Home_page.html">Home</a></li>
+				<li><a href="histroy_page.html">Our Philosophy </a></li>
+				<li><a href="category_page.html">Saptanga Model</a></li>
+				<li><a href="#">About us</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<section class="about">
+		<h1>About Us</h1>
+		<h3 style="font-weight: bold">Times Talk is Knowledge platform</h3>
+		<div class="about-info">
+			<div class="about-img">
+				<img src="aimg.jpg" alt="Geeksforgeeks">
+			</div>
+			<div>
+	<p><b>Our Goal:</b>At Times Talks, our mission is to empower individuals by providing them with the knowledge needed to make well-informed decisions in the world of watches. We strive to unravel the intricacies of timekeeping, offering insights tailored for both the inquisitive minds and passionate collectors. Our aim is to demystify the art of watches and foster a community where everyone can engage in their shared fascination for timepieces. Join us as we navigate the world of horology together, making the appreciation of watches accessible and enjoyable for all.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="team">
+		<h1>Meet Our Team</h1>
+		<div class="team-cards">
+			<!-- Cards here -->
+			<!-- Card 1 -->
+			<div class="card">
+				<div class="card-img">
+					<img src="noimage.jpg" alt="User 1">
+				</div><br>
+				<div class="card-info">
+					<h2 class="card-name">Nanditha</h2><br>
+					<p class="card-role">Team Member 1</p><br>
+					<p class="card-email">nandithah.bba22@chanakyauniversity.edu.in</p>
+					
+				</div>
+			</div>
+
+			<!-- Card 2 -->
+			<div class="card">
+				<div class="card-img">
+					<img src="noimage.jpg" alt="User 2">
+				</div><br>
+				<div class="card-info">
+					<h2 class="card-name">Achala</h2><br>
+					<p class="card-role">Team Member 2</p><br>
+					<p class="card-email">achala.bba22@chanakyauniversity.edu.in</p>
+					
+				</div>
+			</div>
+			<!-- Card 3 -->
+			<div class="card">
+				<div class="card-img">
+					<img src="noimage.jpg"alt="User 3">
+				</div><br>
+				<div class="card-info">
+					<h2 class="card-name">Sharanya</h2><br>
+					<p class="card-role">Team Member 3</p><br>
+					<p class="card-email">sharanya.bca22@chanakyauniversity.edu.in</p>
+					
+				</div>
+			</div>
+                        <div class="card">
+				<div class="card-img">
+					<img src="noimage.jpg" alt="User 2">
+				</div><br>
+				<div class="card-info">
+					<h2 class="card-name">Dharithri</h2><br>
+					<p class="card-role">Team Member 4</p><br>
+					<p class="card-email">dharathriv.bcom22@chanakyauniversity.edu.in</p>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<p>© 2023 Times Talks. All Rights Reserved.</p>
+	</footer>
+</body>
+
+</html>

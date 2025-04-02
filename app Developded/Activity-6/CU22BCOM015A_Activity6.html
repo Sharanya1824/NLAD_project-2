@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s, color 0.3s;
+                          height: 400px;
+
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .game-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode .game-container {
+            background: #1e1e1e;
+            color: white;
+        }
+        .sudoku-board {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 0;
+            background: black;
+            padding: 5px;
+            transition: background 0.3s, border-color 0.3s;
+            border: 3px solid black;
+        }
+        .sudoku-board div {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            border: 1px solid #bbb;
+            line-height: 40px;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+.sudoku-board div:nth-child(9n+1) {
+            border-left: 3px solid black;
+        }
+        .sudoku-board div:nth-child(n+1):nth-child(-n+9) {
+            border-top: 3px solid black;
+        }
+        .sudoku-board div:nth-child(3n) {
+            border-right: 3px solid black;
+        }
+        .sudoku-board div:nth-child(n+19):nth-child(-n+27),
+        .sudoku-board div:nth-child(n+46):nth-child(-n+54),
+        .sudoku-board div:nth-child(n+73):nth-child(-n+81) {
+            border-bottom: 3px solid black;
+        }
+        .sudoku-board div:nth-child(9n+4),
+        .sudoku-board div:nth-child(9n+7) {
+            border-left: 1px solid #ddd;
+        }
+        .dark-mode .sudoku-board {
+            background: white;
+            border-color: white;
+        }
+        .dark-mode .sudoku-board div {
+            background: #333;
+            color: white;
+            border: 1px solid #bbb;
+        }
+        .controls {
+            margin-top: 10px;
+        }
+        .controls button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .timer {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+ .icons {
+            position: relative;
+            top: -10px;
+        }
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode .settings-menu {
+            background: #222;
+            color: white;
+            border: 1px solid #444;
+        }
+
+            
+.fixed {
+            background: lightgray;
+            font-weight: bold;
+            pointer-events: none;
+
+        }
+        .selected {
+            background: lightblue !important;
+        }
+        .timer {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .incorrect {
+            background-color: red !important;
+            color: white !important;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Sudoku</h1>
+<div class="icons">
+                <button id="help-btn" onclick="showRules()">❓</button>
+                <button id="settings-btn" onclick="toggleSettings()">⚙️</button>
+            </div>
+
+        </header>
+<div id="settings-menu" class="settings-menu">
+            <label>
+                <input type="checkbox" id="dark-mode-toggle" onclick="toggleDarkMode()"> Dark Mode
+            </label>
+        </div>
+
+        <div class="sudoku-board" id="sudoku-board"></div>
+        <div class="controls">
+            <button id="new-game" onclick="generateSudoku()">New Game</button>
+            <button id="solve-game" onclick="solveSudoku()">Solve</button>
+<div class="timer">Time: <span id="timer">00:00</span></div>
+    
+          </div>
+
+        
+     
+    <script>
+        
+let timerInterval;
+        let secondsElapsed = 0;
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            secondsElapsed = 0;
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                secondsElapsed++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+            const seconds = String(secondsElapsed % 60).padStart(2, '0');
+            document.getElementById("timer").textContent = `${minutes}:${seconds}`;
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function startNewGame() {
+            generateSudoku();
+            startTimer();
+        }
+
+        function solveSudoku() {
+            stopTimer();
+            alert("Puzzle solved!");
+        }
+
+        function generateSudoku() {
+            const board = document.getElementById("sudoku-board");
+            board.innerHTML = "";
+            for (let i = 0; i < 81; i++) {
+                let cell = document.createElement("div");
+                if (Math.random() < 0.3) {
+                    cell.textContent = Math.floor(Math.random() * 9) + 1;
+                    cell.contentEditable = false;
+                    cell.style.fontWeight = "bold";
+                } else {
+                    cell.contentEditable = true;
+                }
+                board.appendChild(cell);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", startNewGame);
+
+
+        function isValid(board, row, col, num) {
+            for (let i = 0; i < 9; i++) {
+                if (board[row][i] === num || board[i][col] === num) return false;
+                let boxRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
+                let boxCol = 3 * Math.floor(col / 3) + (i % 3);
+                if (board[boxRow][boxCol] === num) return false;
+            }
+            return true;
+        }
+        
+function showRules() {
+            alert("Each row, column, and 3x3 subgrid in a Sudoku puzzle must contain the numbers 1-9 without repetition. The order of numbers does not matter, but every row must include all digits from 1 to 9 exactly once, each column must follow the same rule, and each 3x3 subgrid must also contain unique numbers from 1 to 9.");
+        }
+function toggleSettings() {
+            const settingsMenu = document.getElementById("settings-menu");
+            settingsMenu.style.display = settingsMenu.style.display === "block" ? "none" : "block";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+
+        function solveBoard(board) {
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    if (board[row][col] === 0) {
+                        for (let num = 1; num <= 9; num++) {
+                            if (isValid(board, row, col, num)) {
+                                board[row][col] = num;
+                                if (solveBoard(board)) return true;
+                                board[row][col] = 0;
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        
+        function generateSudoku() {
+            let board = Array.from({ length: 9 }, () => Array(9).fill(0));
+            for (let i = 0; i < 9; i++) {
+                let num = Math.floor(Math.random() * 9) + 1;
+                while (!isValid(board, i, i, num)) {
+                    num = Math.floor(Math.random() * 9) + 1;
+                }
+                board[i][i] = num;
+            }
+            solveBoard(board);
+            for (let i = 0; i < 40; i++) {
+                let row = Math.floor(Math.random() * 9);
+                let col = Math.floor(Math.random() * 9);
+                board[row][col] = 0;
+            }
+            renderBoard(board);
+        }
+        
+        function solveSudoku() {
+            let board = getBoardArray();
+            if (solveBoard(board)) {
+                renderBoard(board);
+            }
+        }
+        
+        function getBoardArray() {
+            let board = [];
+            let cells = document.querySelectorAll(".sudoku-board div");
+            for (let i = 0; i < 9; i++) {
+                board.push([]);
+                for (let j = 0; j < 9; j++) {
+                    let value = parseInt(cells[i * 9 + j].textContent) || 0;
+                    board[i].push(value);
+                }
+            }
+            return board;
+        }
+        
+        function renderBoard(board) {
+            const boardElement = document.getElementById("sudoku-board");
+            boardElement.innerHTML = "";
+            board.forEach(row => {
+                row.forEach(num => {
+                    let cell = document.createElement("div");
+                    cell.textContent = num !== 0 ? num : "";
+                    cell.contentEditable = num === 0;
+                    boardElement.appendChild(cell);
+                });
+            });
+        }
+        
+        document.addEventListener("DOMContentLoaded", generateSudoku);
+    </script>
+</body>
+</html>
